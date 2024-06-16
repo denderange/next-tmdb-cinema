@@ -28,3 +28,16 @@ export const getMovieById = async (movieID: number) => {
 		throw new Error("Error fetching data: " + error);
 	}
 };
+
+export const getSearchResults = async (searchTerm: string) => {
+	try {
+		const res = await fetch(
+			`${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${searchTerm}&language=en-US&page=1&include_adult=false`
+		);
+		const data = await res.json();
+		const results = data.results;
+		return results;
+	} catch (error) {
+		throw new Error("Error fetching data: " + error);
+	}
+};
